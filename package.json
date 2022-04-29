@@ -1,0 +1,29 @@
+{
+  "name": "ense701_speed",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "app": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shairyl/ENSE701_SPEED.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shairyl/ENSE701_SPEED/issues"
+  },
+  "homepage": "https://github.com/shairyl/ENSE701_SPEED#readme",
+  "devDependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.0",
+    "mongoose": "^6.3.1",
+    "nodemon": "^2.0.15",
+    "validation": "0.0.1"
+  }
+}
