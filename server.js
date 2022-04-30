@@ -7,7 +7,7 @@ const path = require("path");
 
 const app = express();
 
-if (config.get("env") === "prod") {
+if (process.env.env === "prod") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
 
   // any request that is not caught by the above routes, send back index.html
