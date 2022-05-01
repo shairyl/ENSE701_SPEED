@@ -4,10 +4,9 @@
 name: Heroku Deployment CI
 
 on:
-  pull_request:
+  push:
     branches: [main]
-    types: [closed]
-
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
