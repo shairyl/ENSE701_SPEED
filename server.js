@@ -4,8 +4,21 @@
 const express = require("express");
 const config = require("config");
 const path = require("path");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const connectDB = require("./config/db");
 
 const app = express();
+
+connectDB();
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+app.use(cors({ origin: true, credentials: true }));
+
+// Init Middleware
+app.use(express.json({ extended: false }));
 
 if (process.env.env === "prod") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
