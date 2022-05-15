@@ -7,6 +7,7 @@ const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
+const SPEED = require("./routes/api/SPEED");
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use(cors({ origin: true, credentials: true }));
 
 // Init Middleware
 app.use(express.json({ extended: false }));
+
+app.use("/api/speed", SPEED);
 
 if (process.env.env === "prod") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
