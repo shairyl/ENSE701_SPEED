@@ -1,6 +1,6 @@
 import React from "react";
 import Home from "./pages/home";
-import submission from "./pages/submission";
+import Submission from "./pages/submission";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,9 +10,10 @@ const App = () => {
     <Router>
       <div>
         <div className="content">
-          <Switch>
+          <Submission />
+          {/*           <Switch>
             <Route exact path="/" component={submission} />
-          </Switch>
+          </Switch> */}
         </div>
       </div>
     </Router>

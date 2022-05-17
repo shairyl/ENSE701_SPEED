@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-const Home = () => {
+const Submission = () => {
   // state variables for form fields
-  const [authors, setAuthor] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [journal, setJournal] = React.useState("");
-  const [year, setYear] = React.useState("");
-  const [volume, setVolume] = React.useState("");
-  const [numberOfPages, setPages] = React.useState("");
-  const [DOI, setDOI] = React.useState("");
-  const [claims, setClaims] = React.useState("");
-  const [methodology, setMethodology] = React.useState("");
+  const [authors, setAuthor] = useState("");
+  const [title, setTitle] = useState("");
+  const [journal, setJournal] = useState("");
+  const [year, setYear] = useState("");
+  const [volume, setVolume] = useState("");
+  const [numberOfPages, setPages] = useState("");
+  const [DOI, setDOI] = useState("");
+  const [claims, setClaims] = useState("");
+  const [methodology, setMethodology] = useState("");
 
   const submitData = async (e) => {
     e.preventDefault();
@@ -44,7 +44,7 @@ const Home = () => {
         {/* create a bootstrap form  withe fields author, year of publication, volume, number of pages, DOI field, claims, methodology */}
         <Form>
           <Form.Group className="mb-3">
-            <Form.Label>Title</Form.Label>
+            <Form.Label for="Title">Title</Form.Label>
             <Form.Control
               onChange={(e) => setTitle(e.target.value)}
               type="text"
@@ -132,4 +132,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Submission;
