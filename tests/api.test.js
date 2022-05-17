@@ -1,4 +1,6 @@
 const request = require("supertest");
+const mongoose = require("mongoose");
+const { deleteOne } = require("../models/submissions");
 const server = require("../server");
 
 jest.mock("axios");
@@ -30,7 +32,6 @@ describe("API testing", () => {
         "Incorrect Payload": "incorrect"
       })
       .then((response) => {
-        console.log("response: ", response);
         expect(response.status).toBe(400);
       });
   });
