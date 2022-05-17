@@ -11,7 +11,7 @@ router.post("/submission", (req, res) => {
     .create(req.body)
     .then((article) => res.json({ msg: "Article added successfully" }))
     .catch((err) =>
-      res.status(400).json({ error: "Unable to add this article", err })
+      res.status(400).json({ error: `Unable to add this article" ${err}` })
     );
 });
 
