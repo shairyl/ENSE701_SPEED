@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import Submission from "./pages/submission";
 
 describe("Submission Form Testing", () => {
+  window.alert = jest.fn();
+
   it("should render the form", () => {
     render(<Submission />);
     expect(screen.getByText("Submitter's Page")).toBeInTheDocument();
@@ -14,5 +16,51 @@ describe("Submission Form Testing", () => {
     expect(screen.getByText("DOI")).toBeInTheDocument();
     expect(screen.getByText("Claims")).toBeInTheDocument();
     expect(screen.getByText("Methodology")).toBeInTheDocument();
+  });
+
+  it("form validation -empty fields", () => {
+    window.alert.mockClear();
+    //check if alert is displayed when the form is submitted without filling the required fields
+    render(<Submission />);
+    const alertMock = jest.spyOn(window, "alert");
+    console.log("alertMock: ", alertMock);
+    const submitButton = screen.getByText("Submit");
+    submitButton.click();
+
+    expect(alertMock).toHaveBeenCalledTimes(1);
+    // check if a browser alert is displayed
+  });
+
+  it("form validation -non-numeric fields", () => {
+    window.alert.mockClear();
+    //check if alert is displayed when the form is submitted with non-numeric fields
+    render(<Submission />);
+    const alertMock = jest.spyOn(window, "alert");
+    console.log("alertMock: ", alertMock);
+    const submitButton = screen.getByText("Submit");
+    // fill in the form with non-numeric fields
+    const title = screen.getByLabelText("Title");
+    const journal = screen.getByLabelText("Journal");
+    const author = screen.getByLabelText("Author");
+    const year = screen.getByLabelText("Year of Publication");
+    const volume = screen.getByLabelText("Volume");
+    const numberOfPages = screen.getByLabelText("Number of Pages");
+    const doi = screen.getByLabelText("DOI");
+    const claims = screen.getByLabelText("Claims");
+    const methodology = screen.getByLabelText("Methodology");
+
+    title.value = "test";
+    journal.value = "test";
+    author.value = "test";
+    year.value = "test";
+    volume.value = "test";
+    numberOfPages.value = "test";
+    doi.value = "test";
+    claims.value = "test";
+    methodology.value = "test";
+
+    submitButton.click();
+
+    expect(alertMock).toHaveBeenCalledTimes(1);
   });
 });
