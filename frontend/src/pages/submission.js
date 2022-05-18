@@ -86,7 +86,7 @@ const Submission = () => {
             <Form.Control
               onChange={(e) => setTitle(e.target.value)}
               type="text"
-              placeholder="Enter Author"
+              placeholder="Enter Title"
               aria-label="Title"
             />
           </Form.Group>
