@@ -4,8 +4,24 @@
 const express = require("express");
 const config = require("config");
 const path = require("path");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const connectDB = require("./config/db");
+const SPEED = require("./routes/api/SPEED");
 
 const app = express();
+
+connectDB();
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+app.use(cors({ origin: true, credentials: true }));
+
+// Init Middleware
+app.use(express.json({ extended: false }));
+
+app.use("/api/speed", SPEED);
 
 if (process.env.env === "prod") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
@@ -22,4 +38,6 @@ if (process.env.env === "prod") {
 
 const port = process.env.PORT || 8082;
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+module.exports = app.listen(port, () =>
+  console.log(`Server running on port ${port}`)
+);
