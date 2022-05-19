@@ -11,7 +11,7 @@ const App = () => {
     <Router>
       <div>
         <div className="content">
-          <Search />
+          <Submission />
           {/*           <Switch>
             <Route exact path="/" component={submission} />
           </Switch> */}

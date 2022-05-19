@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -16,22 +16,65 @@ const Search = () => {
   const [method, setMethodology] = useState("");
   const [resultTable, setResultTable] = useState("");
   const [search, setSearch] = useState("");
+  const [claimField, setClaimsField] = useState("");
+  const [methodField, setMethodField] = useState("");
+
+  useEffect(() => {
+    fetchClaimsandMethodology();
+  }, []);
+
+  const fetchClaimsandMethodology = async () => {
+    const response2 = await axios.get("/api/speed/speed/fields");
+
+    //loop through array and pick out unique claims and methodologies
+    let claims = [];
+
+    let methods = [];
+
+    response2.data.forEach((element) => {
+      if (!claims.includes(element.claims)) {
+        claims.push(element.claims);
+      }
+      if (!method.includes(element.methodology)) {
+        methods.push(element.methodology);
+      }
+    });
+    let tempClaims = [];
+    let tempMethods = [];
+    for (let i = 0; i < claims.length; i++) {
+      tempClaims.push(<option>{claims[i]}</option>);
+    }
+
+    for (let i = 0; i < methods.length; i++) {
+      tempMethods.push(<option>{methods[i]}</option>);
+    }
+
+    setMethodField(tempMethods);
+    setClaimsField(tempClaims);
+  };
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
         "/api/speed/speed" + `?claims=${claims}&methodology=${method}`
       );
-      setResultTable(response.data);
-      setSearch(true);
+      fetchClaimsandMethodology();
+      if (!response.data.length == 0) {
+        setResultTable(response.data);
+        setSearch(true);
+      } else {
+        setSearch(false);
+      }
     } catch (err) {
       console.log(err);
+      setSearch(false);
     }
   };
 
   return (
     <Container>
       <Row>
+        <h2> Search Page</h2>
         <Stack>
           <Form.Group controlId="exampleForm.ControlSelect1">
             <Form.Label>Claims</Form.Label>
@@ -40,10 +83,9 @@ const Search = () => {
               as="select"
               onChange={(e) => setClaims(e.target.value)}
             >
-              <option>Select Claims</option>
-              <option>test</option>
-              <option>Claims 2</option>
-              <option>Claims 3</option>
+              <option>Select a claim</option>
+
+              {claimField}
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="exampleForm.ControlSelect1">
@@ -53,10 +95,8 @@ const Search = () => {
               as="select"
               onChange={(e) => setMethodology(e.target.value)}
             >
-              <option>Select Methodology</option>
-              <option>test</option>
-              <option>Methodology 2</option>
-              <option>Methodology 3</option>
+              <option>Select a methodology</option>
+              {methodField}
             </Form.Control>
           </Form.Group>
           <div className="vr" />
