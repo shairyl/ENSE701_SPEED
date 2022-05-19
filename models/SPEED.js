@@ -44,6 +44,14 @@ const SPEEDSchema = new mongoose.Schema({
   rating: {
     type: Number,
     required: false
+  },
+  typeOfResearch: {
+    type: String,
+    required: true
+  },
+  typeOfParticipants: {
+    type: String,
+    required: true
   }
 });
 
