@@ -9,64 +9,24 @@ import {
   Stack
 } from "react-bootstrap";
 import axios from "axios";
+import Table from "../components/table";
 
 const Search = () => {
   const [claims, setClaims] = useState("");
   const [method, setMethodology] = useState("");
   const [resultTable, setResultTable] = useState("");
+  const [search, setSearch] = useState("");
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
         "/api/speed/speed" + `?claims=${claims}&methodology=${method}`
       );
-      setTable(response.data);
+      setResultTable(response.data);
+      setSearch(true);
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const setTable = (data) => {
-    //create bootstrap table based on json data
-    setResultTable(
-      <div>
-        <h3>Results</h3>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Authors</th>
-              <th scope="col">Journal</th>
-              <th scope="col">Year</th>
-              <th scope="col">Volume</th>
-              <th scope="col">Number of Pages</th>
-              <th scope="col">DOI</th>
-              <th scope="col">Claims</th>
-              <th scope="col">Methodology</th>
-              <th scope="col">Evidence</th>
-              <th scope="col">Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item) => (
-              <tr key={item.title}>
-                <td>{item.title}</td>
-                <td>{item.authors}</td>
-                <td>{item.journal}</td>
-                <td>{item.year}</td>
-                <td>{item.volume}</td>
-                <td>{item.numberOfPages}</td>
-                <td>{item.DOI}</td>
-                <td>{item.claims}</td>
-                <td>{item.methodology}</td>
-                <td>{item.evidence}</td>
-                <td>{item.rating}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
   };
 
   return (
@@ -107,7 +67,8 @@ const Search = () => {
           <Button variant="outline-danger">Reset</Button>
         </Stack>
       </Row>
-      {resultTable}
+      {/* if search is true */}
+      {search ? <Table data={resultTable} /> : <div></div>}
     </Container>
   );
 };
