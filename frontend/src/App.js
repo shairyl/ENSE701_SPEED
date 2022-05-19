@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./pages/home";
 import Submission from "./pages/submission";
+import Moderator from "./pages/moderator";
 import Search from "./pages/searchPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -41,6 +42,7 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route path="/search" component={Search} />
             <Route path="/submission" component={Submission} />
+            <Route path="/moderator" component={Moderator} />
           </Switch>
         </div>
       </div>

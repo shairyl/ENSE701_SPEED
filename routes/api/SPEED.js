@@ -20,6 +20,34 @@ router.get("/speed", (req, res) => {
     });
 });
 
+router.get("/moderator", (req, res) => {
+  // request will contain the following: claim and methodology
+  // grab all submissions from SPEED
+  submission
+    .find({})
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ error: `Unable to process your request" ${err}` });
+    });
+});
+
+router.delete("/moderator", (req, res) => {
+  // request will contain the following: claim and methodology
+  // delete submission wherever ID matches
+  const { id } = req.query;
+  console.log("id: ", id);
+  submission
+    .findByIdAndDelete(id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ error: `Unable to process your request" ${err}` });
+    });
+});
+
 router.get("/speed/fields", (req, res) => {
   // find all claims and methodologies
   SPEED.find({}, { claims: 2, methodology: 2, _id: 0 }).then((data) => {
