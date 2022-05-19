@@ -6,23 +6,32 @@ import ModeratorForm from "../components/moderatorForm";
 const Moderator = () => {
   const [titles, setTitles] = useState([]);
   const [moderatorForm, setModeratorForm] = useState();
-  const [currentID, setCurrentID] = useState();
+  const [currentdata, setCurrentdata] = useState();
 
   useEffect(() => {
     fetchSubmissions();
   }, []);
 
   function insertForm(data) {
-    setCurrentID(data._id);
+    setCurrentdata(data);
     setModeratorForm(<ModeratorForm data={data} />);
   }
 
   const deleteEntry = async () => {
     try {
       //add current id in query
-      console.log("currentID: ", currentID);
-      await axios.delete(`/api/speed/moderator/?id=${currentID}`);
+      await axios.delete(`/api/speed/moderator/?id=${currentdata._id}`);
 
+      fetchSubmissions();
+      setModeratorForm();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const newEntry = async () => {
+    try {
+      await axios.post("/api/speed/analyst", currentdata);
       fetchSubmissions();
       setModeratorForm();
     } catch (err) {
@@ -63,7 +72,7 @@ const Moderator = () => {
         Delete
       </Button>
       <hr />
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={newEntry}>
         Accept
       </Button>
     </Container>
