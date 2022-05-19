@@ -2,8 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 
-// import models/submissions
+//import models/analysts
+//import models/submissions
 const submission = require("../../models/submissions");
+const analyst = require("../../models/analysts");
+
 
 router.post("/submission", (req, res) => {
   console.log("req: ", req.body);
@@ -26,6 +29,27 @@ router.post("/submission", (req, res) => {
       DOI: "test",
       claims: "test",
       methodology: "test"
+    })
+    .catch((err) =>
+      res
+        .status(400)
+        .json({ error: `Unable to delete this article for testing" ${err}` })
+    );
+});
+
+router.post("/analyst", (req, res) => {
+  console.log("req: ", req.body);
+  analyst
+    .create(req.body)
+    .then((article) => res.json({ msg: "Information Published successfully" }))
+    .catch((err) =>
+      res.status(400).json({ error: `Unable to Publish" ${err}` })
+    );
+
+  // delete document if title is "test"
+  analyst
+    .findOneAndDelete({
+      information: "test"
     })
     .catch((err) =>
       res
