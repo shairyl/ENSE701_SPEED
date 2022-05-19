@@ -49,6 +49,7 @@ const Submission = () => {
       console.log("data: ", data);
       try {
         const response = await axios.post("/api/speed/submission", data);
+
         // provide a success message to the user without alert
         setalertMsg(
           <Alert variant="success">
