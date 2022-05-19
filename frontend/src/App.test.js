@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Submission from "./pages/submission";
+import SearchPage from "./pages/searchPage";
 
 describe("Submission Form Testing", () => {
   window.alert = jest.fn();
@@ -62,5 +63,17 @@ describe("Submission Form Testing", () => {
     submitButton.click();
 
     expect(alertMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("Search Page Testing", () => {
+  it("should render the form", () => {
+    render(<SearchPage />);
+    expect(screen.getByText("Search Page")).toBeInTheDocument();
+    expect(screen.getByText("Claims")).toBeInTheDocument();
+    expect(screen.getByText("Methodology")).toBeInTheDocument();
+
+    // check for submit button
+    expect(screen.getByText("Submit")).toBeInTheDocument();
   });
 });
