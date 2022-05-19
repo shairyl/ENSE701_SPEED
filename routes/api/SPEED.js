@@ -5,6 +5,7 @@ const router = express.Router();
 // import models/submissions
 const submission = require("../../models/submissions");
 const SPEED = require("../../models/SPEED");
+const analyst = require("../../models/analyst");
 
 router.get("/speed", (req, res) => {
   // request will contain the following: claim and methodology
@@ -20,6 +21,46 @@ router.get("/speed", (req, res) => {
     });
 });
 
+// creates a new analyst record
+router.post("/analyst", (req, res) => {
+  analyst
+    .create(req.body)
+    .then((article) => res.json({ msg: "Article added successfully" }))
+    .catch((err) =>
+      res.status(400).json({ error: `Unable to add this article" ${err}` })
+    );
+});
+
+// Gets all submissions for the moderator to moderate
+router.get("/moderator", (req, res) => {
+  // request will contain the following: claim and methodology
+  // grab all submissions from SPEED
+  submission
+    .find({})
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ error: `Unable to process your request" ${err}` });
+    });
+});
+
+// delete a submission after a moderator rejects it
+router.delete("/moderator", (req, res) => {
+  // request will contain the following: claim and methodology
+  // delete submission wherever ID matches
+  const { id } = req.query;
+  submission
+    .findByIdAndDelete(id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ error: `Unable to process your request" ${err}` });
+    });
+});
+
+// gets all fields for the search page
 router.get("/speed/fields", (req, res) => {
   // find all claims and methodologies
   SPEED.find({}, { claims: 2, methodology: 2, _id: 0 }).then((data) => {
