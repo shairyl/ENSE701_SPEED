@@ -22,6 +22,18 @@ router.get("/speed", (req, res) => {
 });
 
 // creates a new analyst record
+router.get("/analyst", (req, res) => {
+  analyst
+    .find({})
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ error: `Unable to process your request" ${err}` });
+    });
+});
+
+// creates a new analyst record
 router.post("/analyst", (req, res) => {
   analyst
     .create(req.body)
@@ -29,6 +41,21 @@ router.post("/analyst", (req, res) => {
     .catch((err) =>
       res.status(400).json({ error: `Unable to add this article" ${err}` })
     );
+});
+
+// delete a submission after a analyst rejects it
+router.delete("/analyst", (req, res) => {
+  // request will contain the following: claim and methodology
+  // delete submission wherever ID matches
+  const { id } = req.query;
+  analyst
+    .findByIdAndDelete(id)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json({ error: `Unable to process your request" ${err}` });
+    });
 });
 
 // Gets all submissions for the moderator to moderate

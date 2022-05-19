@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, ListGroup, ListGroupItem, Button } from "react-bootstrap";
-import ModeratorForm from "../components/moderatorForm";
-
-const Moderator = () => {
+import AnalystForm from "../components/analystForm";
+const Analyst = () => {
   const [titles, setTitles] = useState([]);
-  const [moderatorForm, setModeratorForm] = useState();
+  const [analystForm, setanalystForm] = useState();
   const [currentdata, setCurrentdata] = useState();
+  const [evidence, setEvidence] = useState();
+  const [research, setResearch] = useState();
+  const [participants, setParticipants] = useState();
 
   useEffect(() => {
     fetchSubmissions();
@@ -14,16 +16,23 @@ const Moderator = () => {
 
   function insertForm(data) {
     setCurrentdata(data);
-    setModeratorForm(<ModeratorForm data={data} />);
+    setanalystForm(
+      <AnalystForm
+        data={data}
+        setEvidence={setEvidence}
+        setResearch={setResearch}
+        setParticipants={setParticipants}
+      />
+    );
   }
 
   const deleteEntry = async () => {
     try {
       //add current id in query
-      await axios.delete(`/api/speed/moderator/?id=${currentdata._id}`);
+      await axios.delete(`/api/speed/analyst/?id=${currentdata._id}`);
 
       fetchSubmissions();
-      setModeratorForm();
+      setanalystForm();
     } catch (err) {
       console.log(err);
     }
@@ -31,9 +40,12 @@ const Moderator = () => {
 
   const newEntry = async () => {
     try {
-      await axios.post("/api/speed/analyst", currentdata);
+      currentdata.evidence = evidence;
+      currentdata.typeOfResearch = research;
+      currentdata.typeOfParticipants = participants;
+      await axios.post("/api/speed/speed", currentdata);
       fetchSubmissions();
-      setModeratorForm();
+      setanalystForm();
       deleteEntry();
     } catch (err) {
       console.log(err);
@@ -41,7 +53,7 @@ const Moderator = () => {
   };
 
   const fetchSubmissions = async () => {
-    const response = await axios.get("/api/speed/moderator");
+    const response = await axios.get("/api/speed/analyst");
     //loop through response
     let tempTitles = [];
 
@@ -68,7 +80,7 @@ const Moderator = () => {
       <ListGroup defaultActiveKey="#link1">{titles}</ListGroup>
       <hr />
       <h3>More Details</h3>
-      {moderatorForm}
+      {analystForm}
       <Button variant="primary" type="submit" onClick={deleteEntry}>
         Delete
       </Button>
@@ -80,4 +92,4 @@ const Moderator = () => {
   );
 };
 
-export default Moderator;
+export default Analyst;
