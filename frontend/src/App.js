@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import Submission from "./pages/submission";
 import Moderator from "./pages/moderator";
 import Search from "./pages/searchPage";
+import Analyst from "./pages/analysts";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Route,
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/search" component={Search} />
             <Route path="/submission" component={Submission} />
             <Route path="/moderator" component={Moderator} />
+            <Route path="/analyst" component={Analyst} />
           </Switch>
         </div>
       </div>
