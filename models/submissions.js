@@ -48,7 +48,7 @@ const SubmissionSchema = new mongoose.Schema({
   },
   comment: {
     type: String,
-    required: true
+    required: false
   }
 });
 

@@ -19,7 +19,9 @@ describe("API testing", () => {
         numberOfPages: 2,
         DOI: "test",
         claims: "test",
-        methodology: "test"
+        methodology: "test",
+        name: "test",
+        email: "test"
       })
       .then((response) => {
         expect(response.status).toBe(200);
