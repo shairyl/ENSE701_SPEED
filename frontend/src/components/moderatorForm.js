@@ -92,6 +92,26 @@ const ModeratorForm = ({ data }) => {
             aria-label="Methodology"
           />
         </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Name of Submitter</Form.Label>
+          <Form.Control
+            type="text"
+            value={data.name}
+            placeholder="Full Name"
+            aria-label="Name"
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Email of Submitter</Form.Label>
+          <Form.Control
+            type="text"
+            value={data.email}
+            placeholder="Email"
+            aria-label="Email"
+          />
+        </Form.Group>
       </Form>
     </Row>
   );
