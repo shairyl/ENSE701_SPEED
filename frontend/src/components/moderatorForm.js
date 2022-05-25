@@ -1,5 +1,5 @@
 import { Row, Form } from "react-bootstrap";
-const ModeratorForm = ({ data }) => {
+const ModeratorForm = ({ data , setComment}) => {
   return (
     <Row>
       {/* create a bootstrap form  withe fields author, year of publication, volume, number of pages, DOI field, claims, methodology */}
@@ -111,6 +111,16 @@ const ModeratorForm = ({ data }) => {
             placeholder="Email"
             aria-label="Email"
           />
+        </Form.Group>
+
+        <h3>Comment:</h3>
+        <Form.Group className="mb-3">
+            <Form.Control
+              type="text"
+              onChange={(e) => setComment(e.target.value)}
+              placeholder="Enter Comment"
+              aria-label="comment"
+            />
         </Form.Group>
       </Form>
     </Row>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { Container, ListGroup, ListGroupItem, Button, Form } from "react-bootstrap";
 import ModeratorForm from "../components/moderatorForm";
 
 const Moderator = () => {
   const [titles, setTitles] = useState([]);
   const [moderatorForm, setModeratorForm] = useState();
   const [currentdata, setCurrentdata] = useState();
+  const [comment, setComment] = useState();
 
   useEffect(() => {
     fetchSubmissions();
@@ -14,7 +15,11 @@ const Moderator = () => {
 
   function insertForm(data) {
     setCurrentdata(data);
-    setModeratorForm(<ModeratorForm data={data} />);
+    setModeratorForm(
+      <ModeratorForm 
+        data={data} 
+        setComment = {setComment}
+      />);
   }
 
   const deleteEntry = async () => {
