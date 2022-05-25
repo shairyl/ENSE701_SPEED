@@ -13,6 +13,8 @@ const Submission = () => {
   const [DOI, setDOI] = useState("");
   const [claims, setClaims] = useState("");
   const [methodology, setMethodology] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [alertMsg, setalertMsg] = useState("");
   // checks if form fields are empty and if year and pages and volumes are numbers
   const validateForm = () => {
@@ -28,7 +30,9 @@ const Submission = () => {
       methodology.length > 0 &&
       isNaN(year) === false &&
       isNaN(numberOfPages) === false &&
-      isNaN(volume) === false
+      isNaN(volume) === false &&
+      name.length > 0 &&
+      email.length > 0
     );
   };
 
@@ -44,7 +48,9 @@ const Submission = () => {
         numberOfPages,
         DOI,
         claims,
-        methodology
+        methodology,
+        name,
+        email
       };
       console.log("data: ", data);
       try {
@@ -167,6 +173,26 @@ const Submission = () => {
               type="text"
               placeholder="Enter Methodology"
               aria-label="Methodology"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              onChange={(e) => setName(e.target.value)}
+              type="text"
+              placeholder="Enter Full Name"
+              aria-label="Name"
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Enter your email"
+              aria-label="Email"
             />
           </Form.Group>
 

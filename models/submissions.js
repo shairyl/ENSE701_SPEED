@@ -37,6 +37,18 @@ const SubmissionSchema = new mongoose.Schema({
   methodology: {
     type: String,
     required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  comment: {
+    type: String,
+    required: false
   }
 });
 

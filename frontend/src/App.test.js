@@ -17,6 +17,8 @@ describe("Submission Form Testing", () => {
     expect(screen.getByText("DOI")).toBeInTheDocument();
     expect(screen.getByText("Claims")).toBeInTheDocument();
     expect(screen.getByText("Methodology")).toBeInTheDocument();
+    expect(screen.getByText("Name")).toBeInTheDocument();
+    expect(screen.getByText("Email")).toBeInTheDocument();
   });
 
   it("form validation -empty fields", () => {
@@ -49,6 +51,8 @@ describe("Submission Form Testing", () => {
     const doi = screen.getByLabelText("DOI");
     const claims = screen.getByLabelText("Claims");
     const methodology = screen.getByLabelText("Methodology");
+    const name = screen.getByLabelText("Name");
+    const email = screen.getByLabelText("Email");
 
     title.value = "test";
     journal.value = "test";
@@ -59,6 +63,8 @@ describe("Submission Form Testing", () => {
     doi.value = "test";
     claims.value = "test";
     methodology.value = "test";
+    name.value = "test";
+    email.value = "test";
 
     submitButton.click();
 
