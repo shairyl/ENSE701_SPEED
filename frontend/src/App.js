@@ -7,7 +7,7 @@ import Analyst from "./pages/analysts";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Route,
-  Redirect,
+  //Redirect,
   NavLink,
   BrowserRouter as Router,
   Switch
@@ -18,24 +18,30 @@ const App = () => {
   return (
     <Router>
       <div>
-        <h1>Software Engineering Practice Evidence Repository (SEPER)</h1>
+        
         <ul className="header">
+          <nav>
+            <a href="#" class="logo">
+              <h1>
+                <span class="jab">Speed</span><span class="tv">WEB</span
+                ><span class="fist">&infin;</span>
+              </h1>
+            </a>
+          </nav>
           <li>
-            <NavLink exact to="/">
-              Home
-            </NavLink>
+            <NavLink exact to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/analyst">Analyst</NavLink>
+            <NavLink to="/submission">Submit</NavLink>
           </li>
           <li>
             <NavLink to="/moderator">Moderator</NavLink>
           </li>
           <li>
-            <NavLink to="/search">Search</NavLink>
+            <NavLink to="/analyst">Analyst</NavLink>
           </li>
           <li>
-            <NavLink to="/submission">Submit</NavLink>
+            <NavLink to="/search">Search</NavLink>
           </li>
         </ul>
         <div className="content">
@@ -49,6 +55,7 @@ const App = () => {
         </div>
       </div>
     </Router>
+    
   );
 };
 
