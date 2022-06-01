@@ -1,5 +1,5 @@
 {
-  "ATLAS_URI": "",
+  "ATLAS_URI": "mongodb+srv://admin:speedproject123@speeddatabase.19hss.mongodb.net/SpeedDatabase?retryWrites=true&w=majority",
   "PORT": 8082,
   "env": "dev"
 }
