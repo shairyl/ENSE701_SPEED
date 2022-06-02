@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Submission from "./pages/submission";
 import SearchPage from "./pages/searchPage";
+import Homepage from "./pages/home";
 
 describe("Submission Form Testing", () => {
   window.alert = jest.fn();
@@ -81,5 +82,13 @@ describe("Search Page Testing", () => {
 
     // check for submit button
     expect(screen.getByText("Submit")).toBeInTheDocument();
+  });
+});
+
+describe("Home Page Testing", () => {
+  it("should render the form", () => {
+    render(<Homepage />);
+    // check for submit button
+    expect(screen.getByText("Learn More")).toBeInTheDocument();
   });
 });

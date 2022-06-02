@@ -37,4 +37,33 @@ describe("API testing", () => {
         expect(response.status).toBe(400);
       });
   });
+
+  it("POST api/speed/analyst - Correct Payload", async () => {
+    await request(server)
+      .post("/api/speed/analyst")
+      .send({
+        title: "test",
+        authors: "test",
+        journal: "test",
+        year: 2001,
+        volume: 1,
+        numberOfPages: 2,
+        DOI: "test",
+        claims: "test",
+        methodology: "test"
+      })
+      .then((response) => {
+        expect(response.status).toBe(200);
+      });
+  });
+  it("POST api/speed/analyst - Incorrect Payload", async () => {
+    await request(server)
+      .post("/api/speed/analyst")
+      .send({
+        "Incorrect Payload": "incorrect"
+      })
+      .then((response) => {
+        expect(response.status).toBe(400);
+      });
+  });
 });
